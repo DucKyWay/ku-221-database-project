@@ -1,0 +1,5 @@
+CREATE TABLE SETTINGS (
+    settings_id INT PRIMARY KEY,
+    name_th VARCHAR(255) NOT NULL,
+    name_en VARCHAR(255) NOT NULL
+);
