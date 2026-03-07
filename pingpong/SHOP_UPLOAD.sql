@@ -1,7 +1,7 @@
 create table `SHOP_UPLOAD` (
-    `SHOP_ID` int(11) not null,
-    `FILE_ID` int(11) not null,
-    `UPLOADED_AT` datetime not null,
-    foreign key (`SHOP_ID`) references `SHOP`(`SHOP_ID`),
-    foreign key (`FILE_ID`) references `FILE`(`FILE_ID`)
+    `shop_id` int(11) not null,
+    `file_id` int(11) not null,
+    `uploaded_at` datetime not null,
+    foreign key (`shop_id`) references `SHOP`(`shop_id`),
+    foreign key (`file_id`) references `FILE`(`file_id`)
 )

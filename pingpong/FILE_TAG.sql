@@ -1,6 +1,6 @@
 create table `FILE_TAG` (
-    `tag_ID` int(11) not null,
-    `FILE_ID` int(11) not null,
-    primary key (`TAG_ID`),
-    foreign key (`FILE_ID`) references `FILE`(`FILE_ID`)
+    `tag_id` int(11) not null,
+    `file_id` int(11) not null,
+    primary key (`tag_id`),
+    foreign key (`file_id`) references `FILE`(`file_id`)
 )

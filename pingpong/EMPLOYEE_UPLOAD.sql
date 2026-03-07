@@ -1,7 +1,7 @@
 create table `EMPLOYEE_UPLOAD` (
-    `EMPLOYEE_ID` int(11) not null auto_increment,
-    `FILE_ID` int(11) not null,
-    `UPLOADED_ADD` datetime not null,
-    foreign key (`EMPLOYEE_ID`) references `EMPLOYEE`(`EMPLOYEE_ID`),
-    foreign key (`FILE_ID`) references `FILE`(`FILE_ID`)
+    `employee_id` int(11) not null auto_increment,
+    `file_id` int(11) not null,
+    `uploaded_at` datetime not null,
+    foreign key (`employee_id`) references `EMPLOYEE`(`employee_id`),
+    foreign key (`file_id`) references `FILE`(`file_id`)
 )
