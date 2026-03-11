@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Mar 07, 2026 at 01:49 PM
+-- Generation Time: Mar 11, 2026 at 04:45 AM
 -- Server version: 10.4.28-MariaDB-1:10.4.28+maria~ubu2004
 -- PHP Version: 8.3.26
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `EMPLOYEE` (
   `employee_id` int(11) NOT NULL,
   `date_employed` date DEFAULT NULL,
-  `gender` enum('MALE','FEMALE') NOT NULL,
+  `gender` enum('MALE','FEMALE','OTHER') NOT NULL,
   `phone` varchar(20) NOT NULL,
   `avatar` varchar(255) DEFAULT NULL,
   `salary` decimal(10,2) NOT NULL,

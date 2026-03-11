@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Mar 07, 2026 at 01:48 PM
+-- Generation Time: Mar 11, 2026 at 04:45 AM
 -- Server version: 10.4.28-MariaDB-1:10.4.28+maria~ubu2004
 -- PHP Version: 8.3.26
 
@@ -31,7 +31,7 @@ CREATE TABLE `BRANCH` (
   `branch_id` int(11) NOT NULL,
   `branch_name_th` varchar(255) NOT NULL,
   `branch_name_en` varchar(255) NOT NULL,
-  `address` text NOT NULL
+  `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
