@@ -24,12 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `compensation_entry`
+-- Table structure for table `penalty_entry`
 --
 
-CREATE TABLE `compensation_entry` (
+CREATE TABLE `penalty_entry` (
   `entry_id` int(11) NOT NULL,
-  `snapshot_compensation_entry_type` varchar(50) DEFAULT NULL CHECK (`snapshot_compensation_entry_type` in ('INCOME','DEDUCTION','NON_CALCULATED'))
+  `snapshot_penalty_entry_type` varchar(50) DEFAULT 'BASED_ON_SALARY' CHECK (`snapshot_penalty_entry_type` in ('CONSTANT','BASED_ON_SALARY')),
+  `snapshot_penalty_entry_method` varchar(255) DEFAULT NULL,
+  `snapshot_penalty_entry_fixed_amount` decimal(10,2) DEFAULT NULL,
+  `penalty_duration` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -37,9 +40,9 @@ CREATE TABLE `compensation_entry` (
 --
 
 --
--- Indexes for table `compensation_entry`
+-- Indexes for table `penalty_entry`
 --
-ALTER TABLE `compensation_entry`
+ALTER TABLE `penalty_entry`
   ADD PRIMARY KEY (`entry_id`);
 
 --
@@ -47,10 +50,10 @@ ALTER TABLE `compensation_entry`
 --
 
 --
--- Constraints for table `compensation_entry`
+-- Constraints for table `penalty_entry`
 --
-ALTER TABLE `compensation_entry`
-  ADD CONSTRAINT `fk_entry_compensation` FOREIGN KEY (`entry_id`) REFERENCES `statement_entry` (`entry_id`);
+ALTER TABLE `penalty_entry`
+  ADD CONSTRAINT `fk_entry_penalty` FOREIGN KEY (`entry_id`) REFERENCES `statement_entry` (`entry_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

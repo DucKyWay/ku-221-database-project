@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: mariadb22
--- Generation Time: Mar 07, 2026 at 08:15 AM
--- Server version: 11.5.2-MariaDB-ubu2404
--- PHP Version: 8.0.26
+-- Host: 127.0.0.1
+-- Generation Time: Mar 11, 2026 at 03:54 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,41 +18,51 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mobile_project`
+-- Database: `pretest_00`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `EMPLOYEE_STATEMENT`
+-- Table structure for table `employee_statement`
 --
 
-CREATE TABLE `EMPLOYEE_STATEMENT` (
-  `employee_statement_id` varchar(191) NOT NULL,
-  `payroll_period_id` varchar(191) DEFAULT NULL,
-  `snapshot_employee_id` varchar(191) NOT NULL,
+CREATE TABLE `employee_statement` (
+  `employee_statement_id` int(11) NOT NULL,
+  `payroll_period_id` int(11) DEFAULT NULL,
+  `snapshot_employee_id` int(11) NOT NULL,
   `snapshot_employee_first_name` varchar(255) NOT NULL,
   `snapshot_employee_last_name` varchar(255) NOT NULL,
   `snapshot_employee_branch_name_th` varchar(255) DEFAULT NULL,
   `snapshot_employee_branch_name_en` varchar(255) DEFAULT NULL,
-  `snapshot_salary` decimal(15,2) NOT NULL,
+  `snapshot_salary` decimal(10,2) NOT NULL,
   `pay_slip_sent` tinyint(1) DEFAULT 0,
   `paid_at` datetime DEFAULT NULL,
   `note` text DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp(),
-  `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+  `updated_at` datetime DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `EMPLOYEE_STATEMENT`
+-- Indexes for table `employee_statement`
 --
-ALTER TABLE `EMPLOYEE_STATEMENT`
+ALTER TABLE `employee_statement`
   ADD PRIMARY KEY (`employee_statement_id`),
-  ADD KEY `payroll_period_id` (`payroll_period_id`);
+  ADD KEY `fk_payroll_period` (`payroll_period_id`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `employee_statement`
+--
+ALTER TABLE `employee_statement`
+  ADD CONSTRAINT `fk_payroll_period` FOREIGN KEY (`payroll_period_id`) REFERENCES `payroll_period` (`payroll_period_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
