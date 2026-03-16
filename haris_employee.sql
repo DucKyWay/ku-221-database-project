@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb22
--- Generation Time: Mar 13, 2026 at 02:54 AM
+-- Generation Time: Mar 16, 2026 at 08:57 AM
 -- Server version: 11.5.2-MariaDB-ubu2404
 -- PHP Version: 8.0.26
 
@@ -54,6 +54,21 @@ CREATE TABLE `COMPENSATION_ENTRY` (
   `snapshot_compensation_entry_type` varchar(50) DEFAULT NULL CHECK (`snapshot_compensation_entry_type` in ('INCOME','DEDUCTION','NON_CALCULATED'))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `COMPENSATION_ENTRY`
+--
+
+INSERT INTO `COMPENSATION_ENTRY` (`entry_id`, `snapshot_compensation_entry_type`) VALUES
+(1, 'INCOME'),
+(3, 'DEDUCTION'),
+(4, 'INCOME'),
+(5, 'DEDUCTION'),
+(7, 'INCOME'),
+(8, 'DEDUCTION'),
+(10, 'DEDUCTION'),
+(11, 'INCOME'),
+(13, 'DEDUCTION');
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +79,17 @@ CREATE TABLE `COMPENSATION_SETTINGS` (
   `settings_id` int(11) NOT NULL,
   `compensation_settings_type` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `COMPENSATION_SETTINGS`
+--
+
+INSERT INTO `COMPENSATION_SETTINGS` (`settings_id`, `compensation_settings_type`) VALUES
+(1, 'เบี้ยขยัน'),
+(2, 'ค่าเดินทาง'),
+(3, 'ค่าอาหาร'),
+(4, 'ประกันสังคม'),
+(5, 'ภาษีหัก ณ ที่จ่าย');
 
 -- --------------------------------------------------------
 
@@ -114,6 +140,22 @@ CREATE TABLE `EMPLOYEE_ADDRESS` (
   `employee_id` int(11) NOT NULL,
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `EMPLOYEE_ADDRESS`
+--
+
+INSERT INTO `EMPLOYEE_ADDRESS` (`address_id`, `employee_id`, `address`) VALUES
+(1, 1, '10/2 ถ.รามอินทรา แขวงคันนายาว เขตคันนายาว กรุงเทพฯ 10230'),
+(2, 2, '55 ซ.ประชาชื่น ถ.ประชาชื่น แขวงทุ่งสองห้อง เขตหลักสี่ กรุงเทพฯ 10210'),
+(3, 3, '22/4 หมู่ 3 ต.บางพลับ อ.ปากเกร็ด จ.นนทบุรี 11120'),
+(4, 4, '88 ถ.ราชพฤกษ์ ต.บางรักน้อย อ.เมือง จ.นนทบุรี 11000'),
+(5, 5, '14 ซ.นนทบุรี 40 ถ.รัตนาธิเบศร์ ต.บางกระสอ อ.เมือง จ.นนทบุรี 11000'),
+(6, 6, '3/7 ถ.ราชพฤกษ์ ต.มหาสวัสดิ์ อ.บางกรวย จ.นนทบุรี 11130'),
+(7, 7, '101 ถ.ราชพฤกษ์ ต.บางสีทอง อ.บางกรวย จ.นนทบุรี 11130'),
+(8, 8, '67/1 ซ.5 ถ.ประชาชื่น ต.บางพลับ อ.ปากเกร็ด จ.นนทบุรี 11120'),
+(9, 9, '200 ถ.รามอินทรา แขวงท่าแร้ง เขตบางเขน กรุงเทพฯ 10220'),
+(10, 10, '45/9 ถ.ราชพฤกษ์ ต.บางรักน้อย อ.เมือง จ.นนทบุรี 11000');
 
 -- --------------------------------------------------------
 
@@ -210,6 +252,13 @@ CREATE TABLE `FILE_TAG` (
   `file_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
+--
+-- Dumping data for table `FILE_TAG`
+--
+
+INSERT INTO `FILE_TAG` (`tag_id`, `file_id`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -222,6 +271,14 @@ CREATE TABLE `OT_CONFIG` (
   `ot_settings_fixed_amount` decimal(10,2) DEFAULT NULL,
   `multiplier` decimal(5,2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `OT_CONFIG`
+--
+
+INSERT INTO `OT_CONFIG` (`ot_settings_type`, `ot_settings_method`, `ot_settings_fixed_amount`, `multiplier`) VALUES
+('BASED_ON_SALARY', 'HOURLY', NULL, '1.50'),
+('CONSTANT', 'HOURLY', '75.00', '1.00');
 
 -- --------------------------------------------------------
 
@@ -237,6 +294,15 @@ CREATE TABLE `OT_ENTRY` (
   `ot_duration` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `OT_ENTRY`
+--
+
+INSERT INTO `OT_ENTRY` (`entry_id`, `snapshot_ot_entry_type`, `snapshot_ot_entry_method`, `snapshot_ot_entry_fixed_amount`, `ot_duration`) VALUES
+(2, 'BASED_ON_SALARY', 'HOURLY', '0.00', '3.00'),
+(9, 'CONSTANT', 'HOURLY', '75.00', '8.00'),
+(12, 'BASED_ON_SALARY', 'HOURLY', '0.00', '4.00');
+
 -- --------------------------------------------------------
 
 --
@@ -248,6 +314,14 @@ CREATE TABLE `OT_SETTINGS` (
   `ot_settings_type` varchar(100) DEFAULT NULL,
   `ot_settings_created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `OT_SETTINGS`
+--
+
+INSERT INTO `OT_SETTINGS` (`settings_id`, `ot_settings_type`, `ot_settings_created_at`) VALUES
+(1, 'BASED_ON_SALARY', '2026-03-01 08:00:00'),
+(2, 'CONSTANT', '2026-03-01 08:00:00');
 
 -- --------------------------------------------------------
 
@@ -298,6 +372,14 @@ CREATE TABLE `PENALTY_CONFIG` (
   `penalty_settings_fixed_amount` decimal(10,2) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
+--
+-- Dumping data for table `PENALTY_CONFIG`
+--
+
+INSERT INTO `PENALTY_CONFIG` (`penalty_settings_type`, `penalty_settings_method`, `penalty_settings_fixed_amount`) VALUES
+('BASED_ON_SALARY', 'DAILY', NULL),
+('CONSTANT', 'DAILY', '300.00');
+
 -- --------------------------------------------------------
 
 --
@@ -312,6 +394,13 @@ CREATE TABLE `PENALTY_ENTRY` (
   `penalty_duration` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `PENALTY_ENTRY`
+--
+
+INSERT INTO `PENALTY_ENTRY` (`entry_id`, `snapshot_penalty_entry_type`, `snapshot_penalty_entry_method`, `snapshot_penalty_entry_fixed_amount`, `penalty_duration`) VALUES
+(6, 'CONSTANT', 'DAILY', '300.00', '2.00');
+
 -- --------------------------------------------------------
 
 --
@@ -323,6 +412,14 @@ CREATE TABLE `PENALTY_SETTINGS` (
   `penalty_settings_type` varchar(100) DEFAULT NULL,
   `penalty_settings_created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `PENALTY_SETTINGS`
+--
+
+INSERT INTO `PENALTY_SETTINGS` (`settings_id`, `penalty_settings_type`, `penalty_settings_created_at`) VALUES
+(1, 'BASED_ON_SALARY', '2026-03-01 08:00:00'),
+(2, 'CONSTANT', '2026-03-01 08:00:00');
 
 -- --------------------------------------------------------
 
@@ -365,6 +462,17 @@ CREATE TABLE `POSITION` (
   `label` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `POSITION`
+--
+
+INSERT INTO `POSITION` (`position_id`, `label`) VALUES
+(1, 'ผู้จัดการสาขา'),
+(2, 'พนักงานเสิร์ฟ'),
+(3, 'พนักงานครัว'),
+(4, 'แคชเชียร์'),
+(5, 'พนักงานทำความสะอาด');
+
 -- --------------------------------------------------------
 
 --
@@ -376,6 +484,16 @@ CREATE TABLE `SETTINGS` (
   `name_th` varchar(255) NOT NULL,
   `name_en` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+--
+-- Dumping data for table `SETTINGS`
+--
+
+INSERT INTO `SETTINGS` (`settings_id`, `name_th`, `name_en`) VALUES
+(1, 'วันทำงานต่อเดือน', 'Work Days Per Month'),
+(2, 'ชั่วโมงทำงานต่อวัน', 'Work Hours Per Day'),
+(3, 'อัตราค่าล่วงเวลา', 'OT Rate'),
+(4, 'วันหยุดประจำสัปดาห์', 'Weekly Off Day');
 
 -- --------------------------------------------------------
 
@@ -434,6 +552,13 @@ CREATE TABLE `SHOP_UPLOAD` (
   `uploaded_at` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
+--
+-- Dumping data for table `SHOP_UPLOAD`
+--
+
+INSERT INTO `SHOP_UPLOAD` (`shop_name`, `file_id`, `uploaded_at`) VALUES
+(1, 1, '2026-03-12 11:08:43');
+
 -- --------------------------------------------------------
 
 --
@@ -448,6 +573,25 @@ CREATE TABLE `STATEMENT_ENTRY` (
   `amount` decimal(10,2) DEFAULT NULL,
   `entry_created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `STATEMENT_ENTRY`
+--
+
+INSERT INTO `STATEMENT_ENTRY` (`entry_id`, `employee_statement_id`, `snapshot_entry_name_th`, `snapshot_entry_name_en`, `amount`, `entry_created_at`) VALUES
+(1, 10, 'เบี้ยขยัน', 'Attendance Bonus', '500.00', '2026-03-25 09:00:00'),
+(2, 10, 'ล่วงเวลา', 'Overtime', '1125.00', '2026-03-25 09:00:00'),
+(3, 10, 'ประกันสังคม', 'Social Security', '-750.00', '2026-03-25 09:00:00'),
+(4, 11, 'ค่าเดินทาง', 'Travel Allowance', '300.00', '2026-03-25 09:00:00'),
+(5, 11, 'ประกันสังคม', 'Social Security', '-540.00', '2026-03-25 09:00:00'),
+(6, 11, 'ขาดงาน', 'Absence Penalty', '-600.00', '2026-03-25 09:00:00'),
+(7, 12, 'เบี้ยขยัน', 'Attendance Bonus', '500.00', '2026-03-25 09:00:00'),
+(8, 12, 'ประกันสังคม', 'Social Security', '-510.00', '2026-03-25 09:00:00'),
+(9, 13, 'ล่วงเวลา', 'Overtime', '600.00', '2026-03-25 09:00:00'),
+(10, 13, 'ประกันสังคม', 'Social Security', '-480.00', '2026-03-25 09:00:00'),
+(11, 14, 'เบี้ยขยัน', 'Attendance Bonus', '500.00', '2026-03-25 09:00:00'),
+(12, 14, 'ล่วงเวลา', 'Overtime', '1500.00', '2026-03-25 09:00:00'),
+(13, 14, 'ประกันสังคม', 'Social Security', '-600.00', '2026-03-25 09:00:00');
 
 --
 -- Indexes for dumped tables
@@ -698,3 +842,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
